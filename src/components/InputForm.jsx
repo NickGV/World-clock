@@ -11,20 +11,26 @@ export const InputForm = () => {
   const handleChange = (e) => {
     setInputQuery(e.target.value)
     setQuery(e.target.value);
+    
   };
   useEffect(() => {
-    setFilteredTimezones(
-      TimeZones.filter(
-        (tz) =>
-          tz.Country.toLowerCase().includes(query.toLowerCase()) ||
-          tz.Timezone.toLowerCase().includes(query.toLowerCase())
-      )
-    );
-  }, [query]);
+    if (inputQuery) {
+      setFilteredTimezones(
+        TimeZones.filter(
+          (tz) =>
+            tz.Country.toLowerCase().startsWith(query.toLowerCase()) ||
+            tz.Timezone.toLowerCase().startsWith(query.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredTimezones([]);
+    }
+  }, [query, inputQuery]);
 
   const handleSelectTz = (timezone) => {
     setInputQuery(timezone);
     setQuery(timezone)
+    setShowList(false);
   };
 
   return (

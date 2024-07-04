@@ -10,14 +10,15 @@ export const ClockProvider = ({ children }) => {
     console.log("done");
   }, []);
 
-  const addClock = (timezone) => {
-    const updatedClocks = [...clocks, timezone];
+  const addClock = (timezone, isoCode) => {
+    if (clocks.includes(timezone)) return;
+    const updatedClocks = [...clocks, {timezone, isoCode}];
     setClocks(updatedClocks);
     localStorage.setItem("clocks", JSON.stringify(updatedClocks));
   };
 
   const removeClock = (timezone) => {
-    const updatedClocks = clocks.filter((tz) => tz !== timezone);
+    const updatedClocks = clocks.filter((clock) => clock.timezone !== timezone);
     setClocks(updatedClocks);
     localStorage.setItem("clocks", JSON.stringify(updatedClocks));
   };

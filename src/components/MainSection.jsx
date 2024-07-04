@@ -5,7 +5,7 @@ import { SearchSection } from "./SearchSection";
 export const MainSection = () => {
   const [showPage, setSetshowPage] = useState("search");
   return (
-    <main className="w-full h-4/5 flex p-4 ">
+    <main className="w-full h-90 flex p-4 ">
       <NavBar setSetshowPage={setSetshowPage} />
       {showPage === "search" ? (
         <>
